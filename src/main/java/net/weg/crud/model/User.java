@@ -24,6 +24,5 @@ public class User {
     private Archive picture;
     private Boolean isEnabled;
     @OneToOne(cascade = CascadeType.ALL)
-    @JsonIgnore
     private UsuarioDetailsEntity usuarioDetailsEntity;
 }

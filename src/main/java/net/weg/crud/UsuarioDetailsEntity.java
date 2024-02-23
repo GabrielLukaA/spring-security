@@ -1,5 +1,6 @@
 package net.weg.crud;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
@@ -30,10 +31,9 @@ public class UsuarioDetailsEntity implements UserDetails {
     private boolean accountNonLocked;
     private boolean accountNonExpired;
     private boolean credentialsNonExpired;
-    @OneToMany
     private Collection<Authorization> authorities;
-
     @OneToOne(mappedBy = "usuarioDetailsEntity")
+    @JsonIgnore
     private User user;
 
 }

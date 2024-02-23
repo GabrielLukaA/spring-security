@@ -10,18 +10,18 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-@Entity
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class Authorization implements GrantedAuthority {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String name;
+@AllArgsConstructor
+public enum Authorization implements GrantedAuthority {
+
+    GET("get"),
+    POST("Post"),
+    PUT("Put"),
+    DELETE("Delete");
+
+private final String name;
     @Override
     public String getAuthority() {
-        return name;
+        return name();
     }
 }
