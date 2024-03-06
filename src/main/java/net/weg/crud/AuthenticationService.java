@@ -17,13 +17,13 @@ public class AuthenticationService implements UserDetailsService {
 
     private UserRepository userRepository;
 
-
+    // Para o usuário poder ser tanto via email ou CPF, você faz uso de um findBy, caso não seja encontrado você realiza um outro findBy, assim encontrando
+    // usuário
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> optionalUser =  userRepository.findUserByUsuarioDetailsEntity_Username(username);
         if(optionalUser.isPresent()){
-            return optionalUser.get().getUsuarioDetailsEntity()
-                    ;
+            return optionalUser.get().getUsuarioDetailsEntity();
         }
 
         throw new UsernameNotFoundException("Dados inválidos!");

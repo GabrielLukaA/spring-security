@@ -32,8 +32,10 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+        // Garante que não terá uma interceptação na requisição, verifica se a solicitação veio do lugar certo????
         httpSecurity.csrf(AbstractHttpConfigurer::disable);
         httpSecurity.authorizeHttpRequests(authorizeRequests ->
+                // Isso é sequencial ein mané, não esquece
                 authorizeRequests
                         .requestMatchers( HttpMethod.GET,"/user").hasAuthority("GET")
 //                        .requestMatchers( HttpMethod.POST,"/user").hasAuthority("POST")
@@ -41,6 +43,8 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 );
 
+        // Para que o usuário se mantenha autenticado, mantendo a sessão da fera
+        // Apenas para manter o contexto do usuário
         httpSecurity.securityContext(((context) -> context.securityContextRepository(repo)));
 
 

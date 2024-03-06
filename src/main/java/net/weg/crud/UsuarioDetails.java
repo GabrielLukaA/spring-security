@@ -6,11 +6,11 @@
 //import org.springframework.security.core.userdetails.UserDetails;
 //
 //import java.util.Collection;
-//
+//      Essa classe serve apenas para fins estéticos, tendo em vista que não queremos usar todos esses métodos na classe User
 //@AllArgsConstructor
 //public class UsuarioDetails implements UserDetails {
 //
-//
+//    Normalmente se usa o @allargs para passar esse usuário, pois é necessário uma referência
 //    private final User usuario;
 //    @Override
 //    public Collection<? extends GrantedAuthority> getAuthorities() {

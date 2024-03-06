@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import net.weg.crud.model.User;
 import net.weg.crud.repository.UserRepository;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -28,7 +29,7 @@ public class DatabaseConfig {
                 .accountNonLocked(true)
                 .credentialsNonExpired(true)
                 .username("teste")
-                .password("teste123")
+                .password( new BCryptPasswordEncoder().encode("teste123"))
                         .authorities(List.of(Authorization.GET, Authorization.POST))
                 .build());
 
