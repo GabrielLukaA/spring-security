@@ -25,7 +25,7 @@ public class AuthenticationController {
 
 
     private final AuthenticationManager authenticationManager;
-    private SecurityContextRepository securityContextRepository;
+
     private final JwtUtil jwtUtil = new JwtUtil();
     private final CookieUtil cookieUtil = new CookieUtil();
 
@@ -38,7 +38,7 @@ public class AuthenticationController {
         try {
 
 
-            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(usuario.getUsername(), usuario.getPassword());
+            Authentication authenticationToken = new UsernamePasswordAuthenticationToken(usuario.getUsername(), usuario.getPassword());
             Authentication authentication = authenticationManager.authenticate(authenticationToken);
 
             // cria contexto

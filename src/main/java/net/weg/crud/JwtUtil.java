@@ -1,8 +1,6 @@
 package net.weg.crud;
 
-import io.jsonwebtoken.JwtParser;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Date;
@@ -24,13 +22,13 @@ public class JwtUtil {
     private JwtParser getParser(){
         return Jwts.parser().setSigningKey("senha123").build();
     }
-    public void validarToken(String token){
+    private Jws<Claims> validarToken(String token){
         var parser = getParser();
-        parser.parseSignedClaims(token);
+        return parser.parseSignedClaims(token);
     }
 
     public String getUsername(String token){
-        return getParser().parseSignedClaims(token).getPayload().getSubject();
+        return validarToken(token).getPayload().getSubject();
     }
 
 }
