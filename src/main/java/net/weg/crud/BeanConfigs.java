@@ -16,6 +16,10 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.security.web.context.SecurityContextRepository;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+
+import java.util.List;
 
 @AllArgsConstructor
 @Configuration
@@ -23,6 +27,13 @@ public class BeanConfigs {
 
     private final AuthenticationService authenticationService;
 
+    @Bean
+    public CorsConfigurationSource corsConfig(){
+        CorsConfiguration  corsConfiguration = new CorsConfiguration();
+        corsConfiguration.setAllowedOrigins(List.of("http://localhost:3000"));
+        corsConfiguration.setAllowedMethods(List.of("POST"));
+        corsConfiguration.setAllowCredentials(true);
+    }
 
 //    @Autowired
 //    public void config(AuthenticationManagerBuilder auth, AuthenticationService authenticationService) throws Exception {

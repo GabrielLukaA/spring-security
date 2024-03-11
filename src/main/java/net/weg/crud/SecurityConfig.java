@@ -15,10 +15,13 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationFilter;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.security.web.context.SecurityContextRepository;
 
@@ -28,6 +31,7 @@ public class SecurityConfig {
 
 
     private final SecurityContextRepository repo;
+    private final FilterAuthentication filterAuthentication;
 
 
     @Bean
@@ -45,14 +49,20 @@ public class SecurityConfig {
 
         // Para que o usuário se mantenha autenticado, mantendo a sessão da fera
         // Apenas para manter o contexto do usuário
-        httpSecurity.securityContext(((context) -> context.securityContextRepository(repo)));
+        // httpSecurity.securityContext(((context) -> context.securityContextRepository(repo)));
 
 
 
         httpSecurity.formLogin(Customizer.withDefaults());
         httpSecurity.logout(Customizer.withDefaults());
+        httpSecurity.sessionManagement(config -> {
+            config.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        });
+        httpSecurity.addFilterBefore(filterAuthentication, UsernamePasswordAuthenticationFilter.class);
         return httpSecurity.build();
     }
+
+
 
     //    @Bean
 //    public InMemoryUserDetailsManager inMemoryUser(){

@@ -32,28 +32,28 @@ public class FilterAuthentication extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         // Para capturar o cookie do navegador do usuário é necessário
+        if (!publicRoute(request)) {
+            // Busca e validação do token
+            Cookie cookie = cookieUtil.getCookie(request, "JWT");
+            String token = cookie.getValue();
+            String username = jwtUtil.getUsername(token);
 
-        // Busca e validação do token
-        Cookie cookie = cookieUtil.getCookie(request, "JWT");
-        String token = cookie.getValue();
-        String username = jwtUtil.getUsername(token);
+            // Criação do usuário autenticado
+            UserDetails user = userDetailsService.loadUserByUsername(username);
+            Authentication authentication = new UsernamePasswordAuthenticationToken(user, user.getPassword(), user.getAuthorities());
 
-        // Criação do usuário autenticado
-        UserDetails user = userDetailsService.loadUserByUsername(username);
-        Authentication authentication = new UsernamePasswordAuthenticationToken(user, user.getPassword(), user.getAuthorities());
-
-        // Salvamento do usuário autenticado no Security Context
-        SecurityContext context = SecurityContextHolder.createEmptyContext();
+            // Salvamento do usuário autenticado no Security Context
+            SecurityContext context = SecurityContextHolder.createEmptyContext();
             // setta um obj de authenticação, com o objeto  já autenticado!
             context.setAuthentication(authentication);
             securityContextRepository.saveContext(context, request, response);
-
-            // Continuação da requisição
-            filterChain.doFilter(request, response);
+        }
+        // Continuação da requisição
+        filterChain.doFilter(request, response);
 
     }
 
-    private boolean publicRoute(HttpServletRequest request){
+    private boolean publicRoute(HttpServletRequest request) {
         return request.getRequestURI().equals("/login") && request.getMethod().equals("POST");
     }
 
