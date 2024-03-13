@@ -31,11 +31,11 @@ public class UsuarioDetailsEntity implements UserDetails {
     // importante lembrar que, graças ao lindo spring os métodos já são gerados automáticamentes, mas eles estão presentes na classe devido ao @Data
     // No caso de poucos atributos não se tem motivo para ter uma classe secundária
     //Caso precise criar, dê uma olhada noa classe UsuarioDetails.Java, essa classe não persiste dados!!!
-    private boolean enabled;
-    private boolean accountNonLocked;
-    private boolean accountNonExpired;
-    private boolean credentialsNonExpired;
-    private Collection<Authorization> authorities;
+    private boolean enabled = true;
+    private boolean accountNonLocked= true;
+    private boolean accountNonExpired= true;
+    private boolean credentialsNonExpired= true;
+    private Collection<Authorization> authorities = null;
     @OneToOne(mappedBy = "usuarioDetailsEntity")
     @JsonIgnore
     private User user;

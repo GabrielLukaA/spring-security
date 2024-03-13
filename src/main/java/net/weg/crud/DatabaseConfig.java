@@ -30,7 +30,7 @@ public class DatabaseConfig {
                 .credentialsNonExpired(true)
                 .username("teste")
                 .password( new BCryptPasswordEncoder().encode("teste123"))
-                        .authorities(List.of(Authorization.GET, Authorization.POST))
+                        .authorities(List.of(Authorization.GET, Authorization.POST, Authorization.POSTUSER))
                 .build());
 
         userRepository.save(user);

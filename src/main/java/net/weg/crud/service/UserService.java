@@ -8,6 +8,7 @@ import net.weg.crud.model.Archive;
 import net.weg.crud.model.User;
 import net.weg.crud.repository.UserRepository;
 import org.springframework.beans.BeanUtils;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -60,6 +61,7 @@ public class UserService {
         System.out.println(userDTO);
         User user = new User();
         BeanUtils.copyProperties(userDTO, user);
+        user.getUsuarioDetailsEntity().setPassword(new BCryptPasswordEncoder().encode(user.getUsuarioDetailsEntity().getPassword()));
         return userRepository.save(user);
     }
 

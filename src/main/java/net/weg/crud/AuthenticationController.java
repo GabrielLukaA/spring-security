@@ -60,4 +60,11 @@ public class AuthenticationController {
         }
 
     }
+
+    @PostMapping("/logout")
+    public void logout(HttpServletRequest request,HttpServletResponse response){
+        Cookie cookie = cookieUtil.getCookie(request, "JWT");
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+    }
 }

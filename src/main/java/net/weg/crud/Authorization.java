@@ -14,10 +14,13 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 @AllArgsConstructor
 public enum Authorization implements GrantedAuthority {
 
-    GET("get"),
-    POST("Post"),
-    PUT("Put"),
-    DELETE("Delete");
+    GET("GET"),
+    POST("POST"),
+    PUT("PUT"),
+    DELETE("DELETE"),
+
+    POSTUSER("POSTUSER");
+
 
 private final String name;
     @Override

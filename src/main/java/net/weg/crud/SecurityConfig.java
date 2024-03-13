@@ -41,7 +41,8 @@ public class SecurityConfig {
         httpSecurity.authorizeHttpRequests(authorizeRequests ->
                 // Isso é sequencial ein mané, não esquece
                 authorizeRequests
-                        .requestMatchers( HttpMethod.GET,"/user").hasAuthority("GET")
+                        .requestMatchers( HttpMethod.GET,"/user/**").hasAuthority("GET")
+                        .requestMatchers( HttpMethod.POST,"/user").hasAuthority("POSTUSER")
                         .requestMatchers( HttpMethod.POST,"/login").permitAll()
 //                        .requestMatchers( HttpMethod.POST,"/user").hasAuthority("POST")
 //                        .requestMatchers("/user").permitAll()
@@ -50,13 +51,13 @@ public class SecurityConfig {
 
         // Para que o usuário se mantenha autenticado, mantendo a sessão da fera
         // Apenas para manter o contexto do usuário
-        // httpSecurity.securityContext(((context) -> context.securityContextRepository(repo)));
+         httpSecurity.securityContext(((context) -> context.securityContextRepository(repo)));
 
 
 //
 //        httpSecurity.formLogin(Customizer.withDefaults());
         httpSecurity.formLogin(AbstractHttpConfigurer::disable);
-        httpSecurity.logout(Customizer.withDefaults());
+        httpSecurity.logout(AbstractHttpConfigurer::disable);
         httpSecurity.sessionManagement(config -> {
             config.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         });
