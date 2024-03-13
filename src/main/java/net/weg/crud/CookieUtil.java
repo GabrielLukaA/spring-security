@@ -15,8 +15,13 @@ public class CookieUtil {
     }
 
     // Método para capturar o cookie do navegador do usuário é necessário
-    public Cookie getCookie(HttpServletRequest request, String name){
-        return  WebUtils.getCookie(request, name);
+    public Cookie getCookie(HttpServletRequest request, String name) throws Exception  {
+        Cookie cookie =  WebUtils.getCookie(request, name);
+        if (cookie != null){
+            return cookie;
+        }
+        throw new Exception("Cookie não encontrado!");
+
     }
 
 

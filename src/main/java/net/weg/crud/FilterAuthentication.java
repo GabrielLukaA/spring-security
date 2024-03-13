@@ -34,7 +34,15 @@ public class FilterAuthentication extends OncePerRequestFilter {
         // Para capturar o cookie do navegador do usuário é necessário
         if (!publicRoute(request)) {
             // Busca e validação do token
-            Cookie cookie = cookieUtil.getCookie(request, "JWT");
+            Cookie cookie;
+            try {
+                 cookie = cookieUtil.getCookie(request, "JWT");
+
+            } catch (Exception e){
+                response.setStatus(401);
+                return;
+            }
+            // Valida o JWT
             String token = cookie.getValue();
             String username = jwtUtil.getUsername(token);
 
@@ -47,6 +55,11 @@ public class FilterAuthentication extends OncePerRequestFilter {
             // setta um obj de authenticação, com o objeto  já autenticado!
             context.setAuthentication(authentication);
             securityContextRepository.saveContext(context, request, response);
+
+            // Renovação do JWT e Cookie
+            Cookie cookieRenovado = cookieUtil.gerarCookieJwt(user);
+            response.addCookie(cookieRenovado);
+
         }
         // Continuação da requisição
         filterChain.doFilter(request, response);
