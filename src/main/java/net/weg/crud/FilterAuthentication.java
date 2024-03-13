@@ -54,7 +54,8 @@ public class FilterAuthentication extends OncePerRequestFilter {
     }
 
     private boolean publicRoute(HttpServletRequest request) {
-        return request.getRequestURI().equals("/login") && request.getMethod().equals("POST");
+        System.out.println(request.toString());
+        return request.getRequestURI().equals("/login") &&request.getMethod().equals("POST");
     }
 
 

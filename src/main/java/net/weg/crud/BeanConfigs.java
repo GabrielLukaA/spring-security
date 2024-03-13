@@ -18,6 +18,7 @@ import org.springframework.security.web.context.HttpSessionSecurityContextReposi
 import org.springframework.security.web.context.SecurityContextRepository;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.List;
 
@@ -31,8 +32,12 @@ public class BeanConfigs {
     public CorsConfigurationSource corsConfig(){
         CorsConfiguration  corsConfiguration = new CorsConfiguration();
         corsConfiguration.setAllowedOrigins(List.of("http://localhost:3000"));
-        corsConfiguration.setAllowedMethods(List.of("POST"));
+        corsConfiguration.setAllowedMethods(List.of("POST",""));
         corsConfiguration.setAllowCredentials(true);
+        corsConfiguration.setAllowedHeaders(List.of("*"));
+        UrlBasedCorsConfigurationSource corsConfigurationSource = new UrlBasedCorsConfigurationSource();
+        corsConfigurationSource.registerCorsConfiguration("/**",corsConfiguration);
+        return corsConfigurationSource;
     }
 
 //    @Autowired
@@ -46,15 +51,15 @@ public class BeanConfigs {
     }
 
 
-    @Bean
-    public PasswordEncoder passwordEncoder(){
-        return  new BCryptPasswordEncoder();
-    }
+//    @Bean
+//    public PasswordEncoder passwordEncoder(){
+//        return  new BCryptPasswordEncoder();
+//    }
 
     @Bean
     public AuthenticationManager authenticationManager(){
         DaoAuthenticationProvider dao  = new DaoAuthenticationProvider();
-//        dao.setPasswordEncoder(new BCryptPasswordEncoder());
+        dao.setPasswordEncoder(new BCryptPasswordEncoder());
         dao.setUserDetailsService(authenticationService);
         return new ProviderManager(dao);
 

@@ -42,6 +42,7 @@ public class SecurityConfig {
                 // Isso é sequencial ein mané, não esquece
                 authorizeRequests
                         .requestMatchers( HttpMethod.GET,"/user").hasAuthority("GET")
+                        .requestMatchers( HttpMethod.POST,"/login").permitAll()
 //                        .requestMatchers( HttpMethod.POST,"/user").hasAuthority("POST")
 //                        .requestMatchers("/user").permitAll()
                         .anyRequest().authenticated()
@@ -52,8 +53,9 @@ public class SecurityConfig {
         // httpSecurity.securityContext(((context) -> context.securityContextRepository(repo)));
 
 
-
-        httpSecurity.formLogin(Customizer.withDefaults());
+//
+//        httpSecurity.formLogin(Customizer.withDefaults());
+        httpSecurity.formLogin(AbstractHttpConfigurer::disable);
         httpSecurity.logout(Customizer.withDefaults());
         httpSecurity.sessionManagement(config -> {
             config.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
