@@ -1,4 +1,4 @@
-package net.weg.crud;
+package net.weg.crud.security.service;
 
 import lombok.AllArgsConstructor;
 import net.weg.crud.model.User;

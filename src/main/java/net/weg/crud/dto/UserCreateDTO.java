@@ -3,8 +3,7 @@ package net.weg.crud.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import net.weg.crud.UsuarioDetailsEntity;
-import org.springframework.security.core.userdetails.UserDetails;
+import net.weg.crud.security.model.entity.UsuarioDetailsEntity;
 
 @AllArgsConstructor
 @NoArgsConstructor

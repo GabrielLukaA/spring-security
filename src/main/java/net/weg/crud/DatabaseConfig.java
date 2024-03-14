@@ -4,6 +4,8 @@ import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
 import net.weg.crud.model.User;
 import net.weg.crud.repository.UserRepository;
+import net.weg.crud.security.model.enums.Authorization;
+import net.weg.crud.security.model.entity.UsuarioDetailsEntity;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 

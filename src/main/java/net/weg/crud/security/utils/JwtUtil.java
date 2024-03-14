@@ -1,4 +1,4 @@
-package net.weg.crud;
+package net.weg.crud.security.utils;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;

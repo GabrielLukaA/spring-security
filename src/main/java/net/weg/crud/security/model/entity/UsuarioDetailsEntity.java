@@ -1,13 +1,11 @@
-package net.weg.crud;
+package net.weg.crud.security.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Min;
 import lombok.*;
 import net.weg.crud.model.User;
+import net.weg.crud.security.model.enums.Authorization;
 import org.hibernate.validator.constraints.Length;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;

@@ -1,4 +1,4 @@
-package net.weg.crud;
+package net.weg.crud.security.utils;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;

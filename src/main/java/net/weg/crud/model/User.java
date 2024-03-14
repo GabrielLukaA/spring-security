@@ -1,11 +1,10 @@
 package net.weg.crud.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import net.weg.crud.UsuarioDetailsEntity;
+import net.weg.crud.security.model.entity.UsuarioDetailsEntity;
 
 @Data
 @Entity

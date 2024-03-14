@@ -1,4 +1,4 @@
-package net.weg.crud;
+package net.weg.crud.security.model.enums;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
